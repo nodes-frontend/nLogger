@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<base href="/">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width">
+
+	</head>
+	<body ng-app="demoApp">
+
+		<!-- bower:js -->
+		<script src="bower_components/angular/angular.js"></script>
+		<!-- endbower -->
+
+		<script src="deps/nMessages.module.js"></script>
+		<script src="deps/nMessages.provider.js"></script>
+		<script src="deps/nMessages.wrapper.directive.js"></script>
+		<script src="deps/nMessages.message.directive.js"></script>
+
+		<script src="src/nLogger.module.js"></script>
+		<script src="src/nLogger.factory.js"></script>
+
+		<script>
+			//stubmodule
+			angular.module('nCore', ['nCore.nLogger', 'nCore.nMessages']);
+
+			angular.module('demoApp', ['nCore']);
+		</script>
+	</body>
+</html>
