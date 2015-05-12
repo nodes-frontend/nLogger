@@ -43,13 +43,13 @@ nLoggerConfigProvider.configure({
 
 All logging methods takes 3 arguments:
 
-´´´javascript
-nLogger.[log,error,warning,success,info](message, data, methodSpecificOptions);
-´´´
+```javascript
+nLogger.method(message, data, methodSpecificOptions);
+```
 
 Message and data can be of any type, methodSpecificOptions can overwrite the defaults and must be an object.
 
-´´´javascript
+```javascript
 angular.module('demoApp', ['nCore'])
 	.run(function(nLogger) {
 
@@ -64,5 +64,5 @@ angular.module('demoApp', ['nCore'])
 		nLogger.info('nLogger.info', window.console);
 		
 	});
-´´´
+```
 
