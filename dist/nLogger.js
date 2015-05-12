@@ -1,8 +1,8 @@
 /**
- * 
+ * A simple logger service for Nodes Angular apps, part of the nCore.
  * @version v1.0.0 - 2015-05-12
- * @link 
- * @author 
+ * @link https://github.com/nodes-galactic/nLogger
+ * @author Dennis Haulund Nielsen
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
 (function () {
@@ -138,7 +138,7 @@
 
 		function warning(message, data, options) {
 
-			var css = 'font-weight: bold; color: gold;';
+			var css = 'font-weight: bold; color: #de770f;';
 
 			var msg = {
 				content: message,
@@ -159,7 +159,7 @@
 
 		function success(message, data, options) {
 
-			var css = 'font-weight: bold; color: green;';
+			var css = 'font-weight: bold; color: #3a945b;';
 
 			var msg = {
 				content: message,
@@ -180,7 +180,7 @@
 
 		function info(message, data, options) {
 
-			var css = 'font-weight: bold; color: blue;';
+			var css = 'font-weight: bold; color: #74bfdd;';
 
 			var msg = {
 				content: message,

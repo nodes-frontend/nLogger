@@ -81,7 +81,7 @@
 
 		function warning(message, data, options) {
 
-			var css = 'font-weight: bold; color: gold;';
+			var css = 'font-weight: bold; color: #de770f;';
 
 			var msg = {
 				content: message,
@@ -102,7 +102,7 @@
 
 		function success(message, data, options) {
 
-			var css = 'font-weight: bold; color: green;';
+			var css = 'font-weight: bold; color: #3a945b;';
 
 			var msg = {
 				content: message,
@@ -123,7 +123,7 @@
 
 		function info(message, data, options) {
 
-			var css = 'font-weight: bold; color: blue;';
+			var css = 'font-weight: bold; color: #74bfdd;';
 
 			var msg = {
 				content: message,
