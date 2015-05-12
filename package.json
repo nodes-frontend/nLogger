@@ -1,12 +1,12 @@
 {
 	"name": "nLogger",
 	"version": "1.0.0",
-	"description": "",
-	"homepage": "",
-	"author": "",
+	"description": "A simple logger service for Nodes Angular apps, part of the nCore.",
+	"homepage": "https://github.com/nodes-galactic/nLogger",
+	"author": "Dennis Haulund Nielsen",
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "https://github.com/nodes-galactic/nLogger"
 	},
 	"licenses": [
 		{

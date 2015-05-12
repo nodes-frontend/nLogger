@@ -3,7 +3,7 @@
 
 	angular
 		.module('nCore.nLogger.factory', [])
-		.factory('nLogger', nLoggerFactory);
+		.service('nLogger', nLoggerFactory);
 
 	/* @ngInject */
 	function nLoggerFactory(nMessages, nLoggerConfig, DEBUG_ENV) {
