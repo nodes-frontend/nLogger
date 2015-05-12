@@ -1,3 +1,10 @@
+/**
+ * 
+ * @version v1.0.0 - 2015-05-12
+ * @link 
+ * @author 
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
 (function () {
 	'use strict';
 
@@ -143,5 +150,57 @@
 		}
 
 	}
+	nLoggerFactory.$inject = ["nMessages", "nLoggerConfig", "DEBUG_ENV"];
 
 })();
+
+(function () {
+	'use strict';
+
+	angular.module('nCore.nLogger', ['DEBUG_ENV', 'nCore.nLogger.config', 'nCore.nLogger.factory', 'nCore.nMessages']);
+
+})();
+
+(function () {
+	'use strict';
+
+	angular
+		.module('nCore.nLogger.config', [])
+		.provider('nLoggerConfig', nLoggerProvider);
+
+	function nLoggerProvider() {
+		/*jshint validthis: true */
+
+		var defaults = {
+			blacklist: ['log', 'warn', 'info', 'error'],
+			console: {
+				enable: true
+			},
+			messages: {
+				enable: true,
+				dismissOnTimeout: false,
+				timeout: 4000,
+				dismissButton: false,
+				dismissButtonHtml: '&times;',
+				dismissOnClick: true
+			}
+		};
+
+		// If config provided, acts as a setter, else acts as a getter
+		this.configure = function(config) {
+			if(!arguments[0]) {
+				return defaults;
+			} else {
+				angular.extend(defaults, config);
+			}
+		};
+
+		/* @ngInject */
+		this.$get = function() {
+			return defaults;
+		};
+
+	}
+
+})();
+

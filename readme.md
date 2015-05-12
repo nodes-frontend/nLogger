@@ -1,23 +1,68 @@
-# Nodes Module Starter Kit bids you welcome!
+# nCore.nLogger
 
-Before you get started writing your next Angular Module, you need to set up a few things:
+A module for logging functionality. This is not for production.
+Please note that we do not disable console methods outside of our angular application scope.
 
-- Come up with an awesome name for your module
-- Rename the files in the `src/` folder to your awesome name
-- Fill out the information in `package.json` and `bower.json` (name, description, etc.)
-- Correct the references in `index.html` to the styles and scripts
-- Create a repository for your module on Github
+When the global DEBUG_ENV variable is set to false we disable all console methods based on your config.
 
-------
+## Dependencies
 
-When you are ready to release your package to the world, run `grunt build` - this will copy the scss files, and concatinate the javascript files.
+- nMessages
+ 
+## Configuration
 
-A more comprehensive guide for submitting your package to Bower is in the works.
+Use the provider to overwrite defaults.
 
------
+```javascript
+var myConfig = nLoggerConfigProvider.configure();
+nLoggerConfigProvider.configure(myConfig);
+```
 
-### We also recommend doing your fellow developers a few favors:
+The .configure() method acts as a getter if no arguments is provided and a setter otherwise.
 
-- Write a guide on how to use your module in the `readme.md` file
-- Write a few demo examples so people can see the intended use
-- If you want to go all the way, make a Github Pages branch, this will give your module a little home on the web where you can host your demos
+Default settings:
+ 
+```javascript
+nLoggerConfigProvider.configure({
+	blacklist: ['log', 'warn', 'info', 'error'], //These methods are disabled in prod env
+	console: {
+		enable: true //Disable the logger console prints
+	},
+	messages: {
+		enable: true, //Disable the logger message prints
+		dismissOnTimeout: false,
+		timeout: 4000,
+		dismissButton: false,
+		dismissButtonHtml: '&times;',
+		dismissOnClick: true
+	}
+});
+``` 
+
+## Usage
+
+All logging methods takes 3 arguments:
+
+´´´javascript
+nLogger.[log,error,warning,success,info](message, data, methodSpecificOptions);
+´´´
+
+Message and data can be of any type, methodSpecificOptions can overwrite the defaults and must be an object.
+
+´´´javascript
+angular.module('demoApp', ['nCore'])
+	.run(function(nLogger) {
+
+		nLogger.log('nLogger.log', {data: 'foo'}, {dismissButton: false});
+
+		nLogger.error('nLogger.error', new Error('Error'));
+
+		nLogger.warning('nLogger.warning', {o: '1'});
+
+		nLogger.success('nLogger.success', [0,1,2,3,{a: 1}]);
+
+		nLogger.info('nLogger.info', window.console);
+		
+	});
+´´´
+

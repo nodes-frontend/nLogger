@@ -10,23 +10,45 @@
 	</head>
 	<body ng-app="demoApp">
 
+		<n-messages-wrapper></n-messages-wrapper>
 		<!-- bower:js -->
 		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+		<script src="bower_components/angular-scenario/angular-scenario.js"></script>
+		<script src="bower_components/nMessages/dist/nMessages.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 		<!-- endbower -->
 
-		<script src="deps/nMessages.module.js"></script>
-		<script src="deps/nMessages.provider.js"></script>
-		<script src="deps/nMessages.wrapper.directive.js"></script>
-		<script src="deps/nMessages.message.directive.js"></script>
-
-		<script src="src/nLogger.module.js"></script>
-		<script src="src/nLogger.factory.js"></script>
+		<!--<script src="src/nLogger.module.js"></script>-->
+		<!--<script src="src/nLogger.provider.js"></script>-->
+		<!--<script src="src/nLogger.factory.js"></script>-->
+		<script src="dist/nLogger.js"></script>
 
 		<script>
-			//stubmodule
+			//debug_env stub
+			angular.module('DEBUG_ENV', [])
+					.constant('DEBUG_ENV', true);
+			//ncore stub
 			angular.module('nCore', ['nCore.nLogger', 'nCore.nMessages']);
 
-			angular.module('demoApp', ['nCore']);
+			angular.module('demoApp', ['nCore'])
+					.config(function(nLoggerConfigProvider) {
+
+						var nLoggerConfig = nLoggerConfigProvider.configure();
+						nLoggerConfig.blacklist.push('error');
+						nLoggerConfig.messages.dismissButton = true;
+						nLoggerConfigProvider.configure(nLoggerConfig);
+
+					})
+					.run(function(nLogger) {
+
+						nLogger.log('nLogger.log', {data: 'foo'}, {dismissButton: false});
+						nLogger.error('nLogger.error', new Error('Error'));
+						nLogger.warning('nLogger.warning', {o: '1'});
+						nLogger.success('nLogger.success', [0,1,2,3,{a: 1}]);
+						nLogger.info('nLogger.info', window.console);
+					});
 		</script>
 	</body>
 </html>
