@@ -1,6 +1,6 @@
 /**
  * A simple logger service for Nodes Angular apps, part of the nCore.
- * @version v1.0.0 - 2015-05-12
+ * @version v1.0.0 - 2015-05-13
  * @link https://github.com/nodes-galactic/nLogger
  * @author Dennis Haulund Nielsen
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -203,4 +203,3 @@
 	nLoggerFactory.$inject = ["nMessages", "nLoggerConfig", "DEBUG_ENV"];
 
 })();
-
