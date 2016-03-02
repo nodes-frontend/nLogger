@@ -1,6 +1,6 @@
 /**
  * A simple logger service for Nodes Angular apps, part of the nCore.
- * @version v1.0.0 - 2015-05-13
+ * @version v1.0.0 - 2016-03-02
  * @link https://github.com/nodes-galactic/nLogger
  * @author Dennis Haulund Nielsen
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -8,7 +8,7 @@
 (function () {
 	'use strict';
 
-	angular.module('nCore.nLogger', ['DEBUG_ENV', 'nCore.nLogger.config', 'nCore.nLogger.factory', 'nCore.nMessages']);
+	angular.module('nCore.nLogger', ['DEBUG_ENV', 'nCore.nLogger.config', 'nCore.nLogger.factory']);
 
 })();
 
@@ -26,14 +26,6 @@
 			blacklist: ['log', 'warn', 'info', 'error'],
 			console: {
 				enable: true
-			},
-			messages: {
-				enable: true,
-				dismissOnTimeout: false,
-				timeout: 4000,
-				dismissButton: false,
-				dismissButtonHtml: '&times;',
-				dismissOnClick: true
 			}
 		};
 
@@ -63,7 +55,7 @@
 		.service('nLogger', nLoggerFactory);
 
 	/* @ngInject */
-	function nLoggerFactory(nMessages, nLoggerConfig, DEBUG_ENV) {
+	function nLoggerFactory(nLoggerConfig, DEBUG_ENV) {
 
 		// Fetch default settings from config provider
 		var defaults = nLoggerConfig;
@@ -98,17 +90,6 @@
 
 			var css = 'font-weight: bold;';
 
-			var msg = {
-				content: message,
-				type: ''
-			};
-
-			angular.extend(msg, defaults.messages, options);
-
-			if(defaults.messages.enable && DEBUG_ENV) {
-				nMessages.create(msg);
-			}
-
 			if(defaults.console.enable) {
 				console.log('%c ' + message, css , (data || ''));
 			}
@@ -118,17 +99,6 @@
 		function error(message, data, options) {
 
 			var css = 'font-weight: bold; color: red;';
-
-			var msg = {
-				content: message,
-				type: 'error'
-			};
-
-			angular.extend(msg, defaults.messages, options);
-
-			if(defaults.messages.enable && DEBUG_ENV) {
-				nMessages.create(msg);
-			}
 
 			if(defaults.console.enable) {
 				console.error('%c ' + message, css , (data || ''));
@@ -140,17 +110,6 @@
 
 			var css = 'font-weight: bold; color: #de770f;';
 
-			var msg = {
-				content: message,
-				type: 'warning'
-			};
-
-			angular.extend(msg, defaults.messages, options);
-
-			if(defaults.messages.enable && DEBUG_ENV) {
-				nMessages.create(msg);
-			}
-
 			if(defaults.console.enable) {
 				console.warn('%c ' + message, css , (data || ''));
 			}
@@ -160,17 +119,6 @@
 		function success(message, data, options) {
 
 			var css = 'font-weight: bold; color: #3a945b;';
-
-			var msg = {
-				content: message,
-				type: 'success'
-			};
-
-			angular.extend(msg, defaults.messages, options);
-
-			if(defaults.messages.enable && DEBUG_ENV) {
-				nMessages.create(msg);
-			}
 
 			if(defaults.console.enable) {
 				console.log('%c ' + message, css , (data || ''));
@@ -182,17 +130,6 @@
 
 			var css = 'font-weight: bold; color: #74bfdd;';
 
-			var msg = {
-				content: message,
-				type: 'info'
-			};
-
-			angular.extend(msg, defaults.messages, options);
-
-			if(defaults.messages.enable && DEBUG_ENV) {
-				nMessages.create(msg);
-			}
-
 			if(defaults.console.enable) {
 				console.info('%c ' + message, css , (data || ''));
 			}
@@ -200,6 +137,6 @@
 		}
 
 	}
-	nLoggerFactory.$inject = ["nMessages", "nLoggerConfig", "DEBUG_ENV"];
+	nLoggerFactory.$inject = ["nLoggerConfig", "DEBUG_ENV"];
 
 })();

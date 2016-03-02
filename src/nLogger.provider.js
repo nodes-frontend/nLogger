@@ -12,14 +12,6 @@
 			blacklist: ['log', 'warn', 'info', 'error'],
 			console: {
 				enable: true
-			},
-			messages: {
-				enable: true,
-				dismissOnTimeout: false,
-				timeout: 4000,
-				dismissButton: false,
-				dismissButtonHtml: '&times;',
-				dismissOnClick: true
 			}
 		};
 

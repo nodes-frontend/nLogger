@@ -14,8 +14,6 @@
 		<!-- bower:js -->
 		<script src="bower_components/angular/angular.js"></script>
 		<script src="bower_components/angular-mocks/angular-mocks.js"></script>
-		<script src="bower_components/angular-scenario/angular-scenario.js"></script>
-		<script src="bower_components/nMessages/dist/nMessages.js"></script>
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 		<!-- endbower -->
@@ -28,21 +26,23 @@
 		<script>
 			//debug_env stub
 			angular.module('DEBUG_ENV', [])
-					.constant('DEBUG_ENV', true);
+					.constant('DEBUG_ENV', false);
 			//ncore stub
-			angular.module('nCore', ['nCore.nLogger', 'nCore.nMessages']);
+			angular.module('nCore', ['nCore.nLogger']);
 
 			angular.module('demoApp', ['nCore'])
 					.config(function(nLoggerConfigProvider) {
 
+						// This demonstrates the blacklist option, here we only blacklist the console.warn method
+						// Therefore you should still see all the other logs in your console.
 						var nLoggerConfig = nLoggerConfigProvider.configure();
-						nLoggerConfig.blacklist.push('error');
-						nLoggerConfig.messages.dismissButton = true;
+						nLoggerConfig.blacklist = ['warn'];
 						nLoggerConfigProvider.configure(nLoggerConfig);
 
 					})
 					.run(function(nLogger) {
 
+						// Do some logging yo
 						nLogger.log('nLogger.log', {data: 'foo'}, {dismissButton: false});
 						nLogger.error('nLogger.error', new Error('Error'));
 						nLogger.warning('nLogger.warning', {o: '1'});

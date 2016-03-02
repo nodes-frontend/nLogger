@@ -20,7 +20,6 @@
   "devDependencies": {
     "angular-mocks": "*",
     "angular-scenario": "*",
-    "nMessages": "*",
     "angular-animate": "*",
     "angular-sanitize": "*"
   }
