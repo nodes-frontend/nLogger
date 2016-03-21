@@ -17,10 +17,5 @@
   "dependencies": {
     "angular": "*"
   },
-  "devDependencies": {
-    "angular-mocks": "*",
-    "angular-scenario": "*",
-    "angular-animate": "*",
-    "angular-sanitize": "*"
-  }
+  "devDependencies": {}
 }
