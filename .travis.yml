@@ -15,8 +15,8 @@ after_success:
 - npm run semantic-release
 - npm run coveralls
 branches:
-  except:
-  - /^v\d+\.\d+\.\d+$/
+  only:
+    - master
 env:
   global:
   - secure: T7iM2RkWXgqWrQyNd+i0Pc2fHhLoNvpdNCsJ0ak2YMrj7bs6mWzLZ++vjwjmGTA0uXSnicV34HswP14x6aejdO4jyBWf/gnSErc1tVNDOsyuxGKatXDomYdWJqpUeR/JKL79GkLoGAlsjusIkEUwZPeZrXRCuKtkxVFxhof/EX1hY5WmH944J7cxpjw+YUlgJFVpxTFcCEoxQpVd+rvfnZPdChLmsC/U17DZSOoS4855R7NxXizeiY0AEP8sLjwGW47CJKulBlZveqrfSEd6onfvLOPmF+/lXWuOnxO9Htf8RYM8Q95iT8a4rT7uMNZFWU+aUG8D1R04CYn+MCfaV1I77aL70KiIDrrFnPCOgZQKdmLmSqINjqYxIt1gO4ddWSDBeyFUBcLKHN51s0wOf7vIGI2M9OMgsQfNOsE2BLdaRshrYD74oo2NsD+9aSLg954akNn0Quc/s5WuHwkMbvVDeIklnPCHXd7X3mwfM7So7JK7od2FKmwx3a9omtNsffzeTYWG4Al9d7RV111v54uXs16vIFqIwxAKE7b5QsAsuf4thtgyJaiewHUzPPDv4XAzjYst+IeuZ8CTOUQ4yiT1tOdkwXOLdAW9kokt9N8+82xBV/fRyukyau//filT2rdTkvG9vb+NLC3NAWPMnTCoLZ8HsCN0JMHKb6YtZak=
