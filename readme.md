@@ -8,10 +8,6 @@ Please note that we do not disable console methods outside of our angular applic
 
 When the global DEBUG_ENV variable is set to false we disable all console methods based on your config.
 
-## Dependencies
-
-- nMessages
- 
 ## Configuration
 
 Use the provider to overwrite defaults.
