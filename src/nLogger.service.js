@@ -6,7 +6,7 @@
 		.service('nLogger', nLoggerFactory);
 
 	/* @ngInject */
-	function nLoggerFactory(nLoggerConfig, DEBUG_ENV) {
+	function nLoggerFactory(nLoggerConfig, DEBUG_ENV, $window) {
 
 		// Fetch default settings from config provider
 		var defaults = nLoggerConfig;
@@ -22,12 +22,12 @@
 		// Disable all blacklisted console methods if in production
 		if(!DEBUG_ENV){
 
-			if(!window.console) {
-				window.console = {};
+			if(!$window.console) {
+				$window.console = {};
 			}
 
 			for(var i = 0; i < nLoggerConfig.blacklist.length; i++) {
-				console[nLoggerConfig.blacklist[i]] = function(){};
+				$window.console[nLoggerConfig.blacklist[i]] = function(){return 'disabled'};
 			}
 		}
 

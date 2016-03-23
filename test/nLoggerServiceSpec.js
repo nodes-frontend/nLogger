@@ -3,6 +3,7 @@ var nLoggerConfig;
 var nLoggerConfigDefaults;
 var DEBUG_ENV;
 var nLoggerRequiredFunctions = ['log', 'error', 'warning', 'success', 'info'];
+var _window;
 
 function _beforeEach() {
 	module('nCore.nLogger.factory');
@@ -16,10 +17,15 @@ function _beforeEach() {
 		});
 
 		$provide.constant('DEBUG_ENV', DEBUG_ENV);
+
+		$provide.value('$window', {
+			console: undefined
+		});
 	});
 
-	inject(['nLogger', function(_nLogger) {
+	inject(['nLogger', '$window', function(_nLogger, $window) {
 		nLogger = _nLogger;
+		_window = $window;
 	}]);
 }
 
@@ -53,16 +59,41 @@ describe('nLogger - general', function() {
 });
 
 describe('nLogger - Production', function() {
-	// TODO: TEST IF CONSOLE[TYPE] is BEING OVERWRITTEN DEPENDING ON DEBUG_ENV
-});
 
-describe('nLogger - Development', function() {
+	var blacklist = ['log', 'warn', 'info', 'error'];
+
 	// TODO: TEST IF CONSOLE[TYPE] is BEING OVERWRITTEN DEPENDING ON DEBUG_ENV
+	beforeEach(function() {
+		DEBUG_ENV = false;
+
+		nLoggerConfigDefaults = {
+			blacklist: blacklist
+		};
+
+		_beforeEach();
+	});
+
+	// It should disable all console[type] from blacklisted array
+	blacklist.forEach(function(blacklisted) {
+
+		// What should the feature do?
+		it('Should disable console.' + blacklisted, function() {
+			// What is the actual output?
+			var actual = _window.console[blacklisted]();
+
+			// What is the expected output?
+			var expected = 'disabled';
+
+			expect(actual).toEqual(expected);
+		});
+	});
 });
 
 describe('nLogger - console enabled', function() {
 
 	beforeEach(function() {
+
+		DEBUG_ENV = true;
 
 		nLoggerConfigDefaults = {
 			console: {
@@ -147,6 +178,8 @@ describe('nLogger - console enabled', function() {
 describe('nLogger - console disabled', function() {
 
 	beforeEach(function() {
+
+		DEBUG_ENV = true;
 
 		nLoggerConfigDefaults = {
 			console: {
