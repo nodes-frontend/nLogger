@@ -1,17 +1,16 @@
-var nLogger;
-var nLoggerConfig;
-var nLoggerConfigDefaults;
-var DEBUG_ENV;
-var nLoggerRequiredFunctions = ['log', 'error', 'warning', 'success', 'info'];
-var _window;
+let nLogger;
+let nLoggerConfig;
+let nLoggerConfigDefaults;
+let DEBUG_ENV;
+let nLoggerRequiredFunctions = ['log', 'error', 'warning', 'success', 'info'];
+let _window;
 
-function _beforeEach() {
+var _beforeEach = () => {
 	module('nCore.nLogger.factory');
 
-	module(function($provide) {
-		$provide.provider('nLoggerConfig', function() {
-
-			this.$get = function() {
+	module(($provide) => {
+		$provide.provider('nLoggerConfig', class {
+			$get() {
 				return nLoggerConfigDefaults;
 			};
 		});
@@ -23,15 +22,15 @@ function _beforeEach() {
 		});
 	});
 
-	inject(['nLogger', '$window', function(_nLogger, $window) {
+	inject(['nLogger', '$window', (_nLogger, $window) => {
 		nLogger = _nLogger;
 		_window = $window;
 	}]);
-}
+};
 
-describe('nLogger - general', function() {
+describe('nLogger - general', () => {
 
-	beforeEach(function() {
+	beforeEach(() => {
 
 		DEBUG_ENV 					= true;
 		nLoggerConfigDefaults 		= {
@@ -44,13 +43,13 @@ describe('nLogger - general', function() {
 		_beforeEach();
 	});
 
-	nLoggerRequiredFunctions.forEach(function(expected){
+	nLoggerRequiredFunctions.forEach((expected) => {
 
 		// What should the feature do?
-		it('should have "' + expected + '" defined', function() {
+		it('should have "' + expected + '" defined', () => {
 
 			// What is the actual output?
-			var actual = nLogger[expected];
+			const actual = nLogger[expected];
 
 			// What is the expected output?
 			expect(actual).toEqual(jasmine.any(Function));
@@ -58,12 +57,12 @@ describe('nLogger - general', function() {
 	});
 });
 
-describe('nLogger - Production', function() {
+describe('nLogger - Production', () => {
 
 	var blacklist = ['log', 'warn', 'info', 'error'];
 
 	// TODO: TEST IF CONSOLE[TYPE] is BEING OVERWRITTEN DEPENDING ON DEBUG_ENV
-	beforeEach(function() {
+	beforeEach(() => {
 		DEBUG_ENV = false;
 
 		nLoggerConfigDefaults = {
@@ -74,24 +73,24 @@ describe('nLogger - Production', function() {
 	});
 
 	// It should disable all console[type] from blacklisted array
-	blacklist.forEach(function(blacklisted) {
+	blacklist.forEach((blacklisted) => {
 
 		// What should the feature do?
-		it('Should disable console.' + blacklisted, function() {
+		it('Should disable console.' + blacklisted, () => {
 			// What is the actual output?
-			var actual = _window.console[blacklisted]();
+			const actual = _window.console[blacklisted]();
 
 			// What is the expected output?
-			var expected = 'disabled';
+			const expected = 'disabled';
 
 			expect(actual).toEqual(expected);
 		});
 	});
 });
 
-describe('nLogger - console enabled', function() {
+describe('nLogger - console enabled', () => {
 
-	beforeEach(function() {
+	beforeEach(() => {
 
 		DEBUG_ENV = true;
 
@@ -105,79 +104,79 @@ describe('nLogger - console enabled', function() {
 	});
 
 	// What should the feature do?
-	it('"log" should call console.log', function() {
+	it('"log" should call console.log', () => {
 
 		spyOn(console, 'log');
 
 		nLogger.log();
 
 		// What is the actual output?
-		var actual = console.log;
+		const actual = console.log;
 
 		// What is the expected output?
 		expect(actual).toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"error" should call console.error', function() {
+	it('"error" should call console.error', () => {
 
 		spyOn(console, 'error');
 
 		nLogger.error();
 
 		// What is the actual output?
-		var actual = console.error;
+		const actual = console.error;
 
 		// What is the expected output?
 		expect(actual).toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"warning" should call console.warn', function() {
+	it('"warning" should call console.warn', () => {
 
 		spyOn(console, 'warn');
 
 		nLogger.warning();
 
 		// What is the actual output?
-		var actual = console.warn;
+		const actual = console.warn;
 
 		// What is the expected output?
 		expect(actual).toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"success" should call console.log', function() {
+	it('"success" should call console.log', () => {
 
 		spyOn(console, 'log');
 
 		nLogger.success();
 
 		// What is the actual output?
-		var actual = console.log;
+		const actual = console.log;
 
 		// What is the expected output?
 		expect(actual).toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"info" should call console.info', function() {
+	it('"info" should call console.info', () => {
 
 		spyOn(console, 'info');
 
 		nLogger.info();
 
 		// What is the actual output?
-		var actual = console.info;
+		const actual = console.info;
 
 		// What is the expected output?
 		expect(actual).toHaveBeenCalled();
 	});
 });
 
-describe('nLogger - console disabled', function() {
+describe('nLogger - console disabled', () => {
 
-	beforeEach(function() {
+	beforeEach(() => {
 
 		DEBUG_ENV = true;
 
@@ -191,70 +190,70 @@ describe('nLogger - console disabled', function() {
 	});
 
 	// What should the feature do?
-	it('"log" should not call console.log', function() {
+	it('"log" should not call console.log', () => {
 
 		spyOn(console, 'log');
 
 		nLogger.log();
 
 		// What is the actual output?
-		var actual = console.log;
+		const actual = console.log;
 
 		// What is the expected output?
 		expect(actual).not.toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"error" should not call console.error', function() {
+	it('"error" should not call console.error', () => {
 
 		spyOn(console, 'error');
 
 		nLogger.error();
 
 		// What is the actual output?
-		var actual = console.error;
+		const actual = console.error;
 
 		// What is the expected output?
 		expect(actual).not.toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"warning" should not call console.warn', function() {
+	it('"warning" should not call console.warn', () => {
 
 		spyOn(console, 'warn');
 
 		nLogger.warning();
 
 		// What is the actual output?
-		var actual = console.warn;
+		const actual = console.warn;
 
 		// What is the expected output?
 		expect(actual).not.toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"success" should not call console.log', function() {
+	it('"success" should not call console.log', () => {
 
 		spyOn(console, 'log');
 
 		nLogger.success();
 
 		// What is the actual output?
-		var actual = console.log;
+		const actual = console.log;
 
 		// What is the expected output?
 		expect(actual).not.toHaveBeenCalled();
 	});
 
 	// What should the feature do?
-	it('"info" should not call console.info', function() {
+	it('"info" should not call console.info', () => {
 
 		spyOn(console, 'info');
 
 		nLogger.info();
 
 		// What is the actual output?
-		var actual = console.info;
+		const actual = console.info;
 
 		// What is the expected output?
 		expect(actual).not.toHaveBeenCalled();

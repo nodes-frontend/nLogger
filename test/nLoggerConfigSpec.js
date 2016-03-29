@@ -1,24 +1,24 @@
-describe('nLoggerConfig', function() {
+describe('nLoggerConfig', () => {
 
-	var nLoggerConfigProvider;
-	var nLoggerConfig;
+	let nLoggerConfigProvider;
+	let nLoggerConfig;
 
-	beforeEach(function() {
+	beforeEach(() => {
 		module('nCore.nLogger.config');
 	});
 
 	// What should the feature do?
-	it('should return defaults', function() {
+	it('should return defaults', () => {
 
-		inject(['nLoggerConfig', function(_nLoggerConfig) {
+		inject(['nLoggerConfig', (_nLoggerConfig) => {
 			nLoggerConfig = _nLoggerConfig; // to use the instance in other parts
 		}]);
 
 		// What is the actual output?
-		var actual = nLoggerConfig;
+		const actual = nLoggerConfig;
 
 		// What is the expected output?
-		var expected = {
+		const expected = {
 			blacklist: ['log', 'warn', 'info', 'error'],
 			console: {
 				enable: true
@@ -29,22 +29,23 @@ describe('nLoggerConfig', function() {
 	});
 
 	// What should the feature do?
-	it('should configure defaults console.enable to false', function() {
+	it('should configure defaults console.enable to false', () => {
 
 		// load the provider with module to be able to call its configuration methods
-		module(['nLoggerConfigProvider', function(_nLoggerConfigProvider) {
+		module(['nLoggerConfigProvider', (_nLoggerConfigProvider) => {
 			nLoggerConfigProvider = _nLoggerConfigProvider; // to use the provider in other parts
 			nLoggerConfigProvider.configure({console: {enable: false}});
 		}]);
 
-		inject(['nLoggerConfig', function(_nLoggerConfig) {
+		inject(['nLoggerConfig', (_nLoggerConfig) => {
 			nLoggerConfig = _nLoggerConfig; // to use the instance in other parts
 		}]);
 
 		// What is the actual output?
-		var actual = nLoggerConfig;
+		const actual = nLoggerConfig;
+
 		// What is the expected output?
-		var expected = {
+		const expected = {
 			blacklist: ['log', 'warn', 'info', 'error'],
 			console: {
 				enable: false
@@ -55,23 +56,23 @@ describe('nLoggerConfig', function() {
 	});
 
 	// What should the feature do?
-	it('should return defaults if no configuration object is provided', function() {
+	it('should return defaults if no configuration object is provided', () => {
 
 		// What is the actual output?
-		var actual;
+		let actual;
 
 		// load the provider with module to be able to call its configuration methods
-		module(['nLoggerConfigProvider', function(_nLoggerConfigProvider) {
+		module(['nLoggerConfigProvider', (_nLoggerConfigProvider) => {
 			nLoggerConfigProvider = _nLoggerConfigProvider; // to use the provider in other parts
 			actual = nLoggerConfigProvider.configure();
 		}]);
 
-		inject(['nLoggerConfig', function(_nLoggerConfig) {
+		inject(['nLoggerConfig', (_nLoggerConfig) => {
 			nLoggerConfig = _nLoggerConfig; // to use the instance in other parts
 		}]);
 
 		// What is the expected output?
-		var expected = {
+		const expected = {
 			blacklist: ['log', 'warn', 'info', 'error'],
 			console: {
 				enable: true
