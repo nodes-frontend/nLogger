@@ -1,17 +1,27 @@
 {
-  "name": "nLogger",
+  "name": "nf-logger",
   "description": "A simple logger service for Angular apps, part of the nCore.",
+  "version": "0.0.0-semantically-released",
   "homepage": "https://github.com/nodes-frontend/nLogger",
   "author": "Dennis Haulund Nielsen",
+  "contributors": [
+    {
+      "name": "Alexander Hafstad",
+      "email": "alexander@hafstad.dk"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nodes-frontend/nLogger"
   },
-  "licenses": [
-    {
-      "type": "MIT"
-    }
+  "keywords": [
+    "angular",
+    "logger"
   ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nodes-frontend/nLogger/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "angular": "1.5.2",
@@ -59,7 +69,7 @@
   },
   "scripts": {
     "commit": "git-cz",
-    "semantic-release": "semantic-release pre && semantic-release post",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "./node_modules/karma/bin/karma start karma.conf.js --single-run",
     "karma": "./node_modules/karma/bin/karma start karma.conf.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
