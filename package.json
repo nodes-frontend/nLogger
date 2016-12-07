@@ -1,5 +1,5 @@
 {
-  "name": "nf-logger",
+  "name": "nLogger",
   "description": "A simple logger service for Angular apps, part of the nCore.",
   "version": "0.0.0-semantically-released",
   "homepage": "https://github.com/nodes-frontend/nLogger",
@@ -47,7 +47,7 @@
     "grunt-filerev": "^2.2.0",
     "grunt-newer": "^1.1.0",
     "grunt-ng-annotate": "^0.10.0",
-    "grunt-sass": "^0.18.1",
+    "grunt-sass": "^1.1.0",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
     "jasmine-core": "2.4.1",

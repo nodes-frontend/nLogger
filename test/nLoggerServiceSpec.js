@@ -1,7 +1,7 @@
 let nLogger;
 let nLoggerConfig;
 let nLoggerConfigDefaults;
-let DEBUG_ENV;
+let ENVIRONMENT;
 let nLoggerRequiredFunctions = ['log', 'error', 'warning', 'success', 'info'];
 let _window;
 
@@ -15,7 +15,7 @@ var _beforeEach = () => {
 			};
 		});
 
-		$provide.constant('DEBUG_ENV', DEBUG_ENV);
+		$provide.constant('ENVIRONMENT', ENVIRONMENT);
 
 		$provide.value('$window', {
 			console: undefined
@@ -31,8 +31,8 @@ var _beforeEach = () => {
 describe('nLogger - general', () => {
 
 	beforeEach(() => {
-
-		DEBUG_ENV 					= true;
+		
+		ENVIRONMENT 				= 'DEVELOPMENT';
 		nLoggerConfigDefaults 		= {
 			blacklist: ['log', 'warn', 'info', 'error'],
 			console: {
@@ -63,7 +63,7 @@ describe('nLogger - Production', () => {
 
 	// TODO: TEST IF CONSOLE[TYPE] is BEING OVERWRITTEN DEPENDING ON DEBUG_ENV
 	beforeEach(() => {
-		DEBUG_ENV = false;
+		ENVIRONMENT = 'PRODUCTION';
 
 		nLoggerConfigDefaults = {
 			blacklist: blacklist
@@ -92,7 +92,7 @@ describe('nLogger - console enabled', () => {
 
 	beforeEach(() => {
 
-		DEBUG_ENV = true;
+		ENVIRONMENT = 'DEVELOPMENT';
 
 		nLoggerConfigDefaults = {
 			console: {
@@ -177,8 +177,8 @@ describe('nLogger - console enabled', () => {
 describe('nLogger - console disabled', () => {
 
 	beforeEach(() => {
-
-		DEBUG_ENV = true;
+		
+		ENVIRONMENT = 'DEVELOPMENT';
 
 		nLoggerConfigDefaults = {
 			console: {

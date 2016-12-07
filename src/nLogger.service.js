@@ -18,7 +18,7 @@
 			success: success,
 			info: info
 		};
-
+		
 		// Disable all blacklisted console methods if in production
 		if(ENVIRONMENT === 'PRODUCTION'){
 
@@ -26,8 +26,8 @@
 				$window.console = {};
 			}
 
-			for(var i = 0; i < nLoggerConfig.blacklist.length; i++) {
-				$window.console[nLoggerConfig.blacklist[i]] = function(){return 'disabled'};
+			for(var i = 0; i < defaults.blacklist.length; i++) {
+				$window.console[defaults.blacklist[i]] = function(){return 'disabled'};
 			}
 		}
 
