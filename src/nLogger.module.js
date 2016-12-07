@@ -1,6 +1,6 @@
 (function () {
 	'use strict';
 
-	angular.module('nCore.nLogger', ['DEBUG_ENV', 'nCore.nLogger.config', 'nCore.nLogger.factory']);
+	angular.module('nCore.nLogger', ['ENVIRONMENT', 'nCore.nLogger.config', 'nCore.nLogger.factory']);
 
 })();
